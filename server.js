@@ -36,105 +36,8 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Platform configurations (extended with more platforms)
+// Platform configurations - अब सारे 15 platforms
 const PLATFORMS = {
-  // --- existing platforms ---
-  github: {
-    name: 'GitHub',
-    url: (u) => `https://github.com/${u}`,
-    check: async (username) => {
-      try {
-        const res = await axios.get(`https://github.com/${username}`, {
-          timeout: 5000,
-          validateStatus: () => true,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        return res.status === 200 ? 'taken' : 'available';
-      } catch {
-        return 'maybe';
-      }
-    }
-  },
-  reddit: {
-    name: 'Reddit',
-    url: (u) => `https://www.reddit.com/user/${u}`,
-    check: async (username) => {
-      try {
-        const res = await axios.get(`https://www.reddit.com/user/${username}`, {
-          timeout: 5000,
-          validateStatus: () => true,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        return res.status === 200 ? 'taken' : 'available';
-      } catch {
-        return 'maybe';
-      }
-    }
-  },
-  telegram: {
-    name: 'Telegram',
-    url: (u) => `https://t.me/${u}`,
-    check: async (username) => {
-      try {
-        const res = await axios.get(`https://t.me/${username}`, {
-          timeout: 5000,
-          validateStatus: () => true,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        return res.status === 200 ? 'taken' : 'available';
-      } catch {
-        return 'maybe';
-      }
-    }
-  },
-  tiktok: {
-    name: 'TikTok',
-    url: (u) => `https://www.tiktok.com/@${u}`,
-    check: async (username) => {
-      try {
-        const res = await axios.get(`https://www.tiktok.com/@${username}`, {
-          timeout: 5000,
-          validateStatus: () => true,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        return res.status === 200 ? 'taken' : 'available';
-      } catch {
-        return 'maybe';
-      }
-    }
-  },
-  pinterest: {
-    name: 'Pinterest',
-    url: (u) => `https://www.pinterest.com/${u}`,
-    check: async (username) => {
-      try {
-        const res = await axios.get(`https://www.pinterest.com/${username}`, {
-          timeout: 5000,
-          validateStatus: () => true,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        return res.status === 200 ? 'taken' : 'available';
-      } catch {
-        return 'maybe';
-      }
-    }
-  },
-  x: {
-    name: 'X (Twitter)',
-    url: (u) => `https://x.com/${u}`,
-    check: async (username) => {
-      try {
-        const res = await axios.get(`https://x.com/${username}`, {
-          timeout: 5000,
-          validateStatus: () => true,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        return res.status === 200 ? 'taken' : 'available';
-      } catch {
-        return 'maybe';
-      }
-    }
-  },
   instagram: {
     name: 'Instagram',
     url: (u) => `https://www.instagram.com/${u}`,
@@ -151,8 +54,6 @@ const PLATFORMS = {
       }
     }
   },
-
-  // --- newly added platforms (same pattern) ---
   youtube: {
     name: 'YouTube',
     url: (u) => `https://www.youtube.com/@${u}`,
@@ -185,6 +86,38 @@ const PLATFORMS = {
       }
     }
   },
+  x: {
+    name: 'X (Twitter)',
+    url: (u) => `https://x.com/${u}`,
+    check: async (username) => {
+      try {
+        const res = await axios.get(`https://x.com/${username}`, {
+          timeout: 5000,
+          validateStatus: () => true,
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        return res.status === 200 ? 'taken' : 'available';
+      } catch {
+        return 'maybe';
+      }
+    }
+  },
+  tiktok: {
+    name: 'TikTok',
+    url: (u) => `https://www.tiktok.com/@${u}`,
+    check: async (username) => {
+      try {
+        const res = await axios.get(`https://www.tiktok.com/@${username}`, {
+          timeout: 5000,
+          validateStatus: () => true,
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        return res.status === 200 ? 'taken' : 'available';
+      } catch {
+        return 'maybe';
+      }
+    }
+  },
   snapchat: {
     name: 'Snapchat',
     url: (u) => `https://www.snapchat.com/add/${u}`,
@@ -201,12 +134,60 @@ const PLATFORMS = {
       }
     }
   },
+  pinterest: {
+    name: 'Pinterest',
+    url: (u) => `https://www.pinterest.com/${u}`,
+    check: async (username) => {
+      try {
+        const res = await axios.get(`https://www.pinterest.com/${username}`, {
+          timeout: 5000,
+          validateStatus: () => true,
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        return res.status === 200 ? 'taken' : 'available';
+      } catch {
+        return 'maybe';
+      }
+    }
+  },
+  reddit: {
+    name: 'Reddit',
+    url: (u) => `https://www.reddit.com/user/${u}`,
+    check: async (username) => {
+      try {
+        const res = await axios.get(`https://www.reddit.com/user/${username}`, {
+          timeout: 5000,
+          validateStatus: () => true,
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        return res.status === 200 ? 'taken' : 'available';
+      } catch {
+        return 'maybe';
+      }
+    }
+  },
   twitch: {
     name: 'Twitch',
     url: (u) => `https://www.twitch.tv/${u}`,
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.twitch.tv/${username}`, {
+          timeout: 5000,
+          validateStatus: () => true,
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        return res.status === 200 ? 'taken' : 'available';
+      } catch {
+        return 'maybe';
+      }
+    }
+  },
+  github: {
+    name: 'GitHub',
+    url: (u) => `https://github.com/${u}`,
+    check: async (username) => {
+      try {
+        const res = await axios.get(`https://github.com/${username}`, {
           timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
@@ -238,7 +219,6 @@ const PLATFORMS = {
     url: (u) => `https://discord.com/users/${u}`,
     check: async (username) => {
       try {
-        // Discord profile check is tricky; we look for a 404 on the user endpoint
         const res = await axios.get(`https://discord.com/users/${username}`, {
           timeout: 5000,
           validateStatus: () => true,
@@ -266,60 +246,28 @@ const PLATFORMS = {
       }
     }
   },
+  telegram: {
+    name: 'Telegram',
+    url: (u) => `https://t.me/${u}`,
+    check: async (username) => {
+      try {
+        const res = await axios.get(`https://t.me/${username}`, {
+          timeout: 5000,
+          validateStatus: () => true,
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        return res.status === 200 ? 'taken' : 'available';
+      } catch {
+        return 'maybe';
+      }
+    }
+  },
   threads: {
     name: 'Threads',
     url: (u) => `https://www.threads.net/@${u}`,
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.threads.net/@${username}`, {
-          timeout: 5000,
-          validateStatus: () => true,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        return res.status === 200 ? 'taken' : 'available';
-      } catch {
-        return 'maybe';
-      }
-    }
-  },
-  patreon: {
-    name: 'Patreon',
-    url: (u) => `https://www.patreon.com/${u}`,
-    check: async (username) => {
-      try {
-        const res = await axios.get(`https://www.patreon.com/${username}`, {
-          timeout: 5000,
-          validateStatus: () => true,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        return res.status === 200 ? 'taken' : 'available';
-      } catch {
-        return 'maybe';
-      }
-    }
-  },
-  behance: {
-    name: 'Behance',
-    url: (u) => `https://www.behance.net/${u}`,
-    check: async (username) => {
-      try {
-        const res = await axios.get(`https://www.behance.net/${username}`, {
-          timeout: 5000,
-          validateStatus: () => true,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        return res.status === 200 ? 'taken' : 'available';
-      } catch {
-        return 'maybe';
-      }
-    }
-  },
-  dribbble: {
-    name: 'Dribbble',
-    url: (u) => `https://dribbble.com/${u}`,
-    check: async (username) => {
-      try {
-        const res = await axios.get(`https://dribbble.com/${username}`, {
           timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
@@ -347,7 +295,7 @@ app.get('/api/check', async (req, res) => {
       return res.status(400).json({ error: 'Platforms required' });
     }
     
-    // Parse platforms
+    // Parse platforms - NO SLICE LIMIT
     const platformList = platforms.split(',').map(p => p.trim().toLowerCase());
     const validPlatforms = platformList.filter(p => PLATFORMS[p]);
     
@@ -393,4 +341,5 @@ app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
   console.log(`📍 Health check: http://localhost:${PORT}/health`);
   console.log(`🔍 API endpoint: http://localhost:${PORT}/api/check`);
+  console.log(`📱 Total platforms supported: ${Object.keys(PLATFORMS).length}`);
 });
