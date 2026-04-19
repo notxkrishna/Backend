@@ -349,7 +349,7 @@ app.get('/api/check', async (req, res) => {
     
     // Parse platforms
     const platformList = platforms.split(',').map(p => p.trim().toLowerCase());
-    const validPlatforms = platformList.filter(p => PLATFORMS[p]).slice(0, 5);
+    const validPlatforms = platformList.filter(p => PLATFORMS[p]).slice(0, 15);
     
     if (validPlatforms.length === 0) {
       return res.status(400).json({ error: 'No valid platforms' });
