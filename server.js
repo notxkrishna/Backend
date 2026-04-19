@@ -45,7 +45,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://github.com/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -61,7 +61,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.reddit.com/user/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -77,7 +77,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://t.me/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -93,7 +93,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.tiktok.com/@${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -109,7 +109,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.pinterest.com/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -125,7 +125,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://x.com/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -141,7 +141,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.instagram.com/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -159,7 +159,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.youtube.com/@${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -175,7 +175,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.facebook.com/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -191,7 +191,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.snapchat.com/add/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -207,7 +207,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.twitch.tv/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -223,7 +223,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.linkedin.com/in/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -240,7 +240,7 @@ const PLATFORMS = {
       try {
         // Discord profile check is tricky; we look for a 404 on the user endpoint
         const res = await axios.get(`https://discord.com/users/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -256,7 +256,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://medium.com/@${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -272,7 +272,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.threads.net/@${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -288,7 +288,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.patreon.com/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -304,7 +304,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://www.behance.net/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -320,7 +320,7 @@ const PLATFORMS = {
     check: async (username) => {
       try {
         const res = await axios.get(`https://dribbble.com/${username}`, {
-          timeout: 3000,
+          timeout: 5000,
           validateStatus: () => true,
           headers: { 'User-Agent': 'Mozilla/5.0' }
         });
@@ -349,7 +349,7 @@ app.get('/api/check', async (req, res) => {
     
     // Parse platforms
     const platformList = platforms.split(',').map(p => p.trim().toLowerCase());
-    const validPlatforms = platformList.filter(p => PLATFORMS[p]).slice(0, 15);
+    const validPlatforms = platformList.filter(p => PLATFORMS[p]);
     
     if (validPlatforms.length === 0) {
       return res.status(400).json({ error: 'No valid platforms' });
